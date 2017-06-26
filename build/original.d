@@ -1,0 +1,1 @@
+original.o: original.s

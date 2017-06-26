@@ -1,0 +1,14 @@
+# Symbol name
+-s starField
+
+# Set the warning/log level to 3
+-W3
+
+# Disable transparency
+-gT!
+
+# Bitmap image
+-gb
+
+# Set the bit depth to 16
+-gB16

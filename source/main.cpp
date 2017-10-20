@@ -17,6 +17,7 @@
 
 #include "foul1.h"
 #include "foul2.h"
+#include "rsfoul.h"
 #include "gameover.h"
 
 #include "key1.h"
@@ -46,6 +47,7 @@
 #include "score7.h"
 #include "score8.h"
 #include "score9.h"
+#include "rsscore.h"
 
 #include "bird1.h"
 #include "bird2.h"
@@ -224,7 +226,7 @@ struct enemy_status croc[6] = {
 	
 	
 pngimg img_foul1 = { (unsigned int *)foul1Bitmap, 36, 14 }; pngimg img_foul2 = { (unsigned int *)foul2Bitmap, 14, 14 };
-pngimg img_gameover = { (unsigned int *)gameoverBitmap, 100, 45 };
+pngimg img_gameover = { (unsigned int *)gameoverBitmap, 100, 45 }; pngimg img_rsfoul = { (unsigned int *)rsfoulBitmap, 72, 14 };
 	
 pngimg img_key1 = { (unsigned int *)key1Bitmap, 42, 14 }; pngimg img_key2 = { (unsigned int *)key2Bitmap, 42, 14 };
 pngimg img_key3 = { (unsigned int *)key3Bitmap, 42, 14 }; pngimg img_key4 = { (unsigned int *)key4Bitmap, 42, 14 };
@@ -242,6 +244,7 @@ pngimg img_score2 = { (unsigned int *)score2Bitmap, 16, 20 }; pngimg img_score3 
 pngimg img_score4 = { (unsigned int *)score4Bitmap, 16, 20 }; pngimg img_score5 = { (unsigned int *)score5Bitmap, 16, 20 };
 pngimg img_score6 = { (unsigned int *)score6Bitmap, 16, 20 }; pngimg img_score7 = { (unsigned int *)score7Bitmap, 16, 20 };
 pngimg img_score8 = { (unsigned int *)score8Bitmap, 16, 20 }; pngimg img_score9 = { (unsigned int *)score9Bitmap, 16, 20 };
+pngimg img_rsscore = { (unsigned int *)rsscoreBitmap, 68, 20 };
 
 pngimg img_bird1 = { (unsigned int *)bird1Bitmap, 8, 10 }; pngimg img_bird2 = { (unsigned int *)bird2Bitmap, 8, 10 };
 pngimg img_bird3 = { (unsigned int *)bird3Bitmap, 10, 8 }; pngimg img_bird4 = { (unsigned int *)bird4Bitmap, 10, 10 };
@@ -273,6 +276,10 @@ pngimg img_jump5 = { (unsigned int *)jump5Bitmap, 14, 20 }; pngimg img_rsjump1 =
 pngimg img_rsjump2 = { (unsigned int *)rsjump2Bitmap, 20, 20 }; pngimg img_rsjump3 = { (unsigned int *)rsjump3Bitmap, 24, 26 };
 pngimg img_rsjump4 = { (unsigned int *)rsjump4Bitmap, 22, 20 }; pngimg img_rsjump5 = { (unsigned int *)rsjump5Bitmap, 14, 20 };
 
+
+int score;
+int lives_counter;
+bool double_score;
 
 void sleepwait(int timer) {
 
@@ -557,10 +564,40 @@ void display_score(int score) {
 
 void update_score( int old_score, int new_score) {
 	int score;
+	int score_blink;
 	
 	/* increment score until new score and display intermediate scores */
-	for( score = old_score; score <= new_score; score++) {
+	for( score = old_score+1; score <= new_score; score++) {
 		display_score( score );
+		
+		/* check if score reaches 300 for chance mode */
+		if(score == 300) {
+	
+			for(score_blink=0; score_blink<5; score_blink++) {
+			
+				sleepwait(300000); 
+				display_jpeg(img_rsscore, 181, 7);
+				sleepwait(300000);
+				display_score( score ); 
+			
+			}
+			
+			/* still all lives left: enter double score mode */
+			if( lives_counter == 3 ) {
+			
+				double_score = TRUE;
+
+			}
+			/* not all lives left: reset all misses */
+			else {
+			
+				lives_counter = 3;
+				display_jpeg(img_rsfoul, foul_pos_map[0][0], foul_pos_map[0][1] );
+			
+			}
+			
+		}
+		
 		sleepwait(100000);
 	}
 }
@@ -570,6 +607,7 @@ int main() {
 	
 	
 	touchPosition touch;
+	int selectscreen = 0;
 
 
     /* Turn on the 2D graphics core. */
@@ -600,24 +638,41 @@ int main() {
 		touchRead(&touch);
 		
 		/* display control screen */
-		if ( ( (touch.px>29) & (touch.px<112) ) & ( (touch.py>22) & (touch.py<85) ) ) displaycontrols_bg();
+		if ( ( (touch.px>29) & (touch.px<112) ) & ( (touch.py>22) & (touch.py<85) ) & (selectscreen!=1) )
+		{ 
+			selectscreen = 1;
+			displaycontrols_bg(); swiWaitForVBlank(); sleepwait(250000);
+			mmEffect( SFX_MOVEJUNIOR );
+		}
 		
 		/* display original screen */
-		if ( ( (touch.px>29) & (touch.px<112) ) & ( (touch.py>109) & (touch.py<171) ) ) displayoriginal_bg();
+		if ( ( (touch.px>29) & (touch.px<112) ) & ( (touch.py>109) & (touch.py<171) ) & (selectscreen!=2) ) 
+		{ 
+			selectscreen = 2;
+			displayoriginal_bg(); swiWaitForVBlank(); sleepwait(250000);
+			mmEffect( SFX_MOVEJUNIOR );
+		}
 		
 		/* display history screen */
-		if ( ( (touch.px>141) & (touch.px<225) ) & ( (touch.py>109) & (touch.py<171) ) ) displayhistory_bg();
+		if ( ( (touch.px>141) & (touch.px<225) ) & ( (touch.py>109) & (touch.py<171) ) & (selectscreen!=3) ) 
+		{ 
+			selectscreen =3;
+			displayhistory_bg(); swiWaitForVBlank(); sleepwait(250000);
+			mmEffect( SFX_MOVEJUNIOR );
+		}
 		
 		/* play game */
 		if ( ( (touch.px>141) & (touch.px<225) ) & ( (touch.py>22) & (touch.py<85) ) ) {
 	
-			displayintro_bg(); displaygame_bg(); 
+			displayintro_bg(); displaygame_bg();
+			selectscreen = 4;
 			
 			int level = 1;
-			int score = 0;
+			score = 0;
 			int old_score = 0;
+			double_score = FALSE;
 			
-			int lives_counter = 3;
+			lives_counter = 3;
 			bool collision_detected = FALSE;
 			
 			int jr_position = 1;
@@ -649,6 +704,15 @@ int main() {
 			bool enemy_moved = FALSE;
 			
 			int cage_index;
+			
+			int run_duration = 0;
+			int run_durlow = 10;
+			int run_durhigh = 30;
+			int score_increment;
+			
+			bool hang_vine = FALSE;
+			int hang_time = 0;
+			int hang_max = 80;
 			
 			bool phase = 0; 
 			
@@ -715,8 +779,6 @@ int main() {
 			/* main game loop */
 			while( !game_over ) {
 				
-				//do { scanKeys(); } while ( !(keysDown() & KEY_X) ); swiWaitForVBlank();
-				
 				if( !special ) {
 				
 					jr_old_position = jr_position;
@@ -749,6 +811,37 @@ int main() {
 						case 20: special = TRUE; special_counter = 0; break;
 					}
 					
+					/* determine hang in vine */
+					if( jr_position != jr_old_position) {
+						
+						switch( jr_position )
+						{
+							case  2: hang_vine = TRUE; hang_time = 0;
+							case  6: hang_vine = TRUE; hang_time = 0;
+							case  8: hang_vine = TRUE; hang_time = 0;
+							case 12: hang_vine = TRUE; hang_time = 0;
+							case 16: hang_vine = TRUE; hang_time = 0;
+						}
+					}
+					
+					/* handle drop from vine after maximum time */
+					if( (hang_vine == TRUE) && (hang_time>=hang_max) ) {
+						
+						switch( jr_position )
+						{
+							case  2: jr_position = jr_pos_map[jr_position][2]; rand();
+							case  6: jr_position = jr_pos_map[jr_position][2]; rand();
+							case  8: jr_position = jr_pos_map[jr_position][2]; rand();
+							case 12: jr_position = jr_pos_map[jr_position][2]; rand();
+							case 16: jr_position = jr_pos_map[jr_position][2]; rand();
+						}
+						
+						hang_vine = FALSE;
+						hang_time = 0;
+					} 
+					
+					if( hang_vine == TRUE) hang_time++;
+					
 					/* determine jump to key */
 					if( (jr_position == 19) && (buttonsDown & KEY_LEFT) && (buttonsDown & KEY_A) ) { 
 						
@@ -763,10 +856,22 @@ int main() {
 							display_jpeg(img_rsjump1, jump_pos_map[0][0], jump_pos_map[0][1] );
 							display_jpeg(img_jump2, jump_pos_map[1][0], jump_pos_map[1][1] );
 							sleepwait(700000);
+	
+							/* determine score depending on run duration and cage part*/
+							if(run_duration<=run_durlow) score_increment = 20;
+							else {
+								if(run_duration>=run_durhigh) score_increment = 5;
+								else {
+									score_increment = 5 + ( (run_durhigh-run_duration) / ((run_durhigh-run_durlow)/15) );
+								}
+							}
+							if(cage_index == 4) score_increment+=20;
+							run_duration = 0;
 							
-							/* remove part of the cage */
+							/* blink part of the cage */
 							for(blink_counter=0; blink_counter<3; blink_counter++) {
 								
+								/* remove part */
 								switch( cage_index ) 
 								{
 									case 1: display_jpeg(img_cage2, cage_pos_map[cage_index-1][0], cage_pos_map[cage_index-1][1] ); break;
@@ -775,20 +880,20 @@ int main() {
 									case 4: display_jpeg(img_cage5, cage_pos_map[cage_index-1][0], cage_pos_map[cage_index-1][1] ); break;
 								}
 								
-								if( (blink_counter == 0) || ( (blink_counter == 1) && (cage_index == 4) ) ) {
-									old_score = score; score=score+1; update_score(old_score, score);
+								/* update score */
+								if(score_increment >= 5) {
+									old_score = score; score+=5; if(double_score) score+=5; update_score(old_score, score);
+									score_increment-=5;
 								}
 								else {
-									sleepwait(100000);
-								}
-											
-								if( (blink_counter == 0) || ( (blink_counter == 1) && (cage_index == 4) ) ) {
-									old_score = score; score=score+4; update_score(old_score, score);
-								}
-								else {
-									sleepwait(400000);
+									if(score_increment != 0) {
+										old_score = score; score=score+score_increment; if(double_score) score=score+score_increment; update_score(old_score, score);
+										sleepwait( (5-score_increment) * 100000);
+										score_increment=0;
+									}
 								}
 								
+								/* restore part */
 								switch( cage_index ) 
 								{
 									case 1: display_jpeg(img_cage1, cage_pos_map[cage_index-1][0], cage_pos_map[cage_index-1][1] ); break;
@@ -797,13 +902,27 @@ int main() {
 									case 4: display_jpeg(img_cage4, cage_pos_map[cage_index-1][0], cage_pos_map[cage_index-1][1] ); break;
 								}
 								
-								if( (blink_counter == 0) && (cage_index == 4) ) {
-									old_score = score; score=score+5; update_score(old_score, score);
+								
+								/* update score */
+								if(score_increment >= 5) {
+									old_score = score; score+=5; if(double_score) score+=5; update_score(old_score, score);
+									score_increment-=5;
 								}
 								else {
-									sleepwait(500000);
+									if(score_increment != 0) {
+										old_score = score; score=score+score_increment; if(double_score) score=score+score_increment; update_score(old_score, score);
+										sleepwait( (5-score_increment) * 100000);
+										score_increment=0;
+									}
 								}
-							}	
+							}
+							
+							/* update remainder of score */
+							if(score_increment > 0) {
+								old_score = score; score=score+score_increment; if(double_score) score=score+score_increment; update_score(old_score, score);
+								score_increment = 0;
+							
+							}
 							
 							switch( cage_index ) 
 								{
@@ -947,6 +1066,9 @@ int main() {
 							
 							display_jpeg(img_rsjump5, jump_pos_map[4][0], jump_pos_map[4][1] );
 							
+							/* when in double score mode: disable it*/
+							if(double_score) double_score = FALSE;
+							
 							/* increase fouls */
 							lives_counter--;
 							if (lives_counter == 2) display_jpeg(img_foul1, foul_pos_map[0][0], foul_pos_map[0][1] );
@@ -1031,6 +1153,9 @@ int main() {
 						coco_hit3 = FALSE;
 						display_jpeg(img_coco1, coco_pos_map[coco_position-1][0], coco_pos_map[coco_position-1][1]);
 						
+						/* reset run duration */
+						run_duration = 0;
+						
 						collision_detected = FALSE;
 						special = FALSE;
 						special_counter = 0;
@@ -1056,6 +1181,9 @@ int main() {
 						sleepwait(700000);
 			
 						display_jpeg(img_rsjump5, jump_pos_map[4][0], jump_pos_map[4][1] );
+
+						/* when in double score mode: disable it*/
+						if(double_score) double_score = FALSE;
 
 						/* increase fouls */
 						lives_counter--;
@@ -1138,6 +1266,9 @@ int main() {
 						coco_hit3 = FALSE;
 						display_jpeg(img_coco1, coco_pos_map[coco_position-1][0], coco_pos_map[coco_position-1][1]);
 						
+						/* reset run duration */
+						run_duration = 0;
+						
 						collision_detected = FALSE;
 						special = FALSE;
 						special_counter = 0;
@@ -1197,7 +1328,10 @@ int main() {
 								
 								sleepwait( blink_timer_hit );
 							}
-							
+						
+						/* when in double score mode: disable it*/
+						if(double_score) double_score = FALSE;
+	
 						/* increase fouls */
 						lives_counter--;
 						if (lives_counter == 2) display_jpeg(img_foul1, foul_pos_map[0][0], foul_pos_map[0][1] );
@@ -1279,6 +1413,9 @@ int main() {
 						coco_hit3 = FALSE;
 						display_jpeg(img_coco1, coco_pos_map[coco_position-1][0], coco_pos_map[coco_position-1][1]);
 						
+						/* reset run duration */
+						run_duration = 0;
+						
 						collision_detected = FALSE;
 						special = FALSE;
 						special_counter = 0;
@@ -1342,7 +1479,7 @@ int main() {
 											sleepwait( cocohit_pause );
 											
 											/* update score */
-											old_score = score; score=score+3; update_score(old_score, score);
+											old_score = score; score+=3; if(double_score) score+=3; update_score(old_score, score);
 											
 											/* reset hit croc */
 											display_jpeg(img_rscroc2, croc_pos_map[croc[croc_index].position][1], croc_pos_map[croc[croc_index].position][2] );
@@ -1375,7 +1512,7 @@ int main() {
 											sleepwait( cocohit_pause );
 											
 											/* update score */
-											old_score = score; score=score+3; update_score(old_score, score);
+											old_score = score; score+=6; if(double_score) score+=6; update_score(old_score, score);
 											
 											/* reset hit bird */
 											display_jpeg(img_rsbird3, bird_pos_map[bird[bird_index].position][1], bird_pos_map[bird[bird_index].position][2] );
@@ -1408,7 +1545,7 @@ int main() {
 											sleepwait( cocohit_pause );
 
 											/* update score */
-											old_score = score; score=score+3; update_score(old_score, score);
+											old_score = score; score+=9; if(double_score) score+=9; update_score(old_score, score);
 											
 											/* reset hit croc */
 											display_jpeg(img_rscroc4, croc_pos_map[croc[croc_index].position][1], croc_pos_map[croc[croc_index].position][2] );
@@ -1468,10 +1605,12 @@ int main() {
 				
 				substep_counter++;
 				
+				
 				if ( substep_counter == resolution ) {
 				
 					enemy_moved = FALSE;
-				
+					run_duration++;
+					
 					/* move birds */
 					for( bird_index = 0; bird_index < birds_active; bird_index++) {
 						
@@ -1602,16 +1741,16 @@ int main() {
 									
 										/* increase score if junior jumped over croc */
 										if( (croc_pos_map[croc[croc_index].position][0] == 2 ) && ( jr_position == 4 ) ) {
-											old_score = score; score=score+1; update_score(old_score, score);
+											old_score = score; score++; if(double_score) score++; update_score(old_score, score);
 										} 
 										if( (croc_pos_map[croc[croc_index].position][0] == 8 ) && ( jr_position == 10 ) ) {
-											old_score = score; score=score+1; update_score(old_score, score);
+											old_score = score; score++; if(double_score) score++; update_score(old_score, score);
 										}
 										if( (croc_pos_map[croc[croc_index].position][0] == 16 ) && ( jr_position == 18 ) ) {
-											old_score = score; score=score+1; update_score(old_score, score);
+											old_score = score; score++; if(double_score) score++; update_score(old_score, score);
 										}
 										if( (croc_pos_map[croc[croc_index].position][0] == 18 ) && ( jr_position == 20 ) ) {
-											old_score = score; score=score+1; update_score(old_score, score);
+											old_score = score; score++; if(double_score) score++; update_score(old_score, score);
 										}
 									
 										/* place croc back in pre queue */
@@ -1688,6 +1827,9 @@ int main() {
 								
 								sleepwait( blink_timer_hit );
 							}	
+
+						/* when in double score mode: disable it*/
+							if(double_score) double_score = FALSE;						
 						
 						/* increase fouls */
 						lives_counter--;
@@ -1769,6 +1911,9 @@ int main() {
 						coco_hit2 = FALSE;
 						coco_hit3 = FALSE;
 						display_jpeg(img_coco1, coco_pos_map[coco_position-1][0], coco_pos_map[coco_position-1][1]);
+						
+						/* reset run duration */
+						run_duration = 0;
 						
 						collision_detected = FALSE;
 						special = FALSE;

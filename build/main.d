@@ -67,6 +67,7 @@ main.o: c:/devkitPro/examples/nds/dkjunior/source/main.cpp \
  c:/devkitPro/examples/nds/dkjunior/build/background.h \
  c:/devkitPro/examples/nds/dkjunior/build/foul1.h \
  c:/devkitPro/examples/nds/dkjunior/build/foul2.h \
+ c:/devkitPro/examples/nds/dkjunior/build/rsfoul.h \
  c:/devkitPro/examples/nds/dkjunior/build/gameover.h \
  c:/devkitPro/examples/nds/dkjunior/build/key1.h \
  c:/devkitPro/examples/nds/dkjunior/build/key2.h \
@@ -92,6 +93,7 @@ main.o: c:/devkitPro/examples/nds/dkjunior/source/main.cpp \
  c:/devkitPro/examples/nds/dkjunior/build/score7.h \
  c:/devkitPro/examples/nds/dkjunior/build/score8.h \
  c:/devkitPro/examples/nds/dkjunior/build/score9.h \
+ c:/devkitPro/examples/nds/dkjunior/build/rsscore.h \
  c:/devkitPro/examples/nds/dkjunior/build/bird1.h \
  c:/devkitPro/examples/nds/dkjunior/build/bird2.h \
  c:/devkitPro/examples/nds/dkjunior/build/bird3.h \
@@ -285,6 +287,8 @@ c:/devkitPro/examples/nds/dkjunior/build/foul1.h:
 
 c:/devkitPro/examples/nds/dkjunior/build/foul2.h:
 
+c:/devkitPro/examples/nds/dkjunior/build/rsfoul.h:
+
 c:/devkitPro/examples/nds/dkjunior/build/gameover.h:
 
 c:/devkitPro/examples/nds/dkjunior/build/key1.h:
@@ -334,6 +338,8 @@ c:/devkitPro/examples/nds/dkjunior/build/score7.h:
 c:/devkitPro/examples/nds/dkjunior/build/score8.h:
 
 c:/devkitPro/examples/nds/dkjunior/build/score9.h:
+
+c:/devkitPro/examples/nds/dkjunior/build/rsscore.h:
 
 c:/devkitPro/examples/nds/dkjunior/build/bird1.h:
 

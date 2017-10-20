@@ -1,0 +1,1 @@
+rsfoul.o: rsfoul.s

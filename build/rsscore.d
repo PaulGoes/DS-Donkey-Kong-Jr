@@ -1,0 +1,1 @@
+rsscore.o: rsscore.s

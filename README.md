@@ -47,7 +47,7 @@ The game is created using devkitpro:
           https://devkitpro.org/.
 
 Good introduction tutorials to using devkitpro and DS programming: 
-          https://patater.com/files/projects/manual/manual.html
+          https://patater.com/files/projects/manual/manual.html.
 
 	  
 ## HOW TO INSTALL AND START THE GAME USING THE DS WITH R4DS

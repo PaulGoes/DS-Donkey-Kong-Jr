@@ -31,7 +31,7 @@ This is the result and I hope you like it.
 A video showing the game can be found on YouTube:
 
 <a href="https://www.youtube.com/watch?v=YmWyA_B5KmM">
-         <img src="https://img.youtube.com/vi/YmWyA_B5KmM/0.jpg" style="width:100%;">
+         <img src="https://img.youtube.com/vi/YmWyA_B5KmM/0.jpg" style="width:70%;">
       </a>
 
 Some information:

@@ -3,7 +3,7 @@ DS Homebrew Donkey Kong Jr Game and Watch
 
 ![DSDKJR](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJRDS.jpg)
 
-=== INTRODUCTION ===
+## INTRODUCTION
 
 In 1982 I got my first ‘handheld’ console: the G&W Donkey Kong Jr. 
 In 1983, I programmed my own version for the TRS-80 home computer.
@@ -49,7 +49,7 @@ Good introduction tutorials to using devkitpro and DS programming:
           https://patater.com/files/projects/manual/manual.html
 
 	  
-=== HOW TO INSTALL AND START THE GAME USING THE DS WITH R4DS ===
+## HOW TO INSTALL AND START THE GAME USING THE DS WITH R4DS
 
 1) It is as simple as putting the dkjunior.nds on the SD card.
 2) Put the SD card back in the R4DS card.
@@ -57,7 +57,7 @@ Good introduction tutorials to using devkitpro and DS programming:
 7) Start the Donkey Kong Junior homebrew application.
 
 
-=== FILE INFORMATION ===
+## FILE INFORMATION
 
 - Folder - audio: contains all the sounds.
 - Folder - build: used to build the game application.

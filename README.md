@@ -1,6 +1,7 @@
 ﻿# DS-Donkey-Kong-Jr
 DS Homebrew Donkey Kong Jr Game and Watch
 
+![DSDKJR](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJRDS.jpg)
 
 === INTRODUCTION ===
 

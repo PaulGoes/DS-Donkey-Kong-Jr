@@ -28,15 +28,12 @@ So I ported the Wii version to the Nintendo DS.
 
 This is the result and I hope you like it.
 
-A video showing the game can be found on YouTube: 
-			[Nintendo DS Homebrew game Donkey Kong Jr](https://www.youtube.com/watch?v=YmWyA_B5KmM).
+A video showing the game can be found on YouTube:
 
 <a href="https://www.youtube.com/watch?v=YmWyA_B5KmM">
          <img src="https://img.youtube.com/vi/YmWyA_B5KmM/0.jpg" style="width:100%;">
       </a>
 
-
-      
 Some information:
 - Gameplay identical to the Game & Watch Donkey Kong Jr.
 - Each level becomes gradually more difficult: more birds and crocs are added.

@@ -45,6 +45,7 @@ Some information:
 
 The game is created using devkitpro: 
           https://devkitpro.org/.
+
 Good introduction tutorials to using devkitpro and DS programming: 
           https://patater.com/files/projects/manual/manual.html
 

@@ -31,7 +31,7 @@ This is the result and I hope you like it.
 A video showing the game can be found on YouTube:
 
 <a href="https://www.youtube.com/watch?v=YmWyA_B5KmM">
-         <img src="https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJR%20Youtube.mp4" style="width:70%;">
+         <img src="https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DSDKJR%20YouTube%20thumbnail.png" style="width:70%;">
       </a>
 
 Some information:

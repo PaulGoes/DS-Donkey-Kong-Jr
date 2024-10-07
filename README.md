@@ -86,4 +86,5 @@ In the emulator you need to place the 'Game & Watch Donkey Kong Jr.nds' rom in t
 > You might also need to provide the generic NDS BIOS files (bios7.bin, bios9.bin and firmware.bin) to the emulator.
 
 When you play the game with RetroArch, it is also possible to get Retro Achievements for the game.
-![DSDKJR](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJRDSRA.jpg)
+
+![DSDKJR](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJRDSRA.png)

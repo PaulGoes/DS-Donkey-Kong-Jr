@@ -50,7 +50,7 @@ Good introduction tutorials to using devkitpro and DS programming:
           https://patater.com/files/projects/manual/manual.html.
 
 	  
-## HOW TO INSTALL AND START THE GAME USING THE DS WITH R4DS
+## HOW TO INSTALL AND START THE GAME USING A DS WITH R4DS
 
 1) It is as simple as putting the dkjunior.nds on the SD card.
 2) Put the SD card back in the R4DS card.
@@ -71,7 +71,7 @@ Good introduction tutorials to using devkitpro and DS programming:
 - File - icon.bmp: game icon image.
 - File - Makefile: devkitpro project make file.
 
-## HOW TO PLAY THE GAME WITH EMULATION
+## HOW TO PLAY THE GAME IN AN EMULATOR
 
 The game can be played with the DeSmuME Nintendo DS emulator: [desmume.org](https://desmume.org/).
 

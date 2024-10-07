@@ -87,4 +87,4 @@ In the emulator you need to place the 'Game & Watch Donkey Kong Jr.nds' rom in t
 
 When you play the game with RetroArch, it is also possible to get Retro Achievements for the game.
 
-![DSDKJR](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJRDSRA.png)
+![DSDKJRRA](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DSDKJRRA.png)

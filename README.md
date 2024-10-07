@@ -58,7 +58,7 @@ Good introduction tutorials to using devkitpro and DS programming:
 7) Start the Donkey Kong Junior homebrew application.
 
 
-## FILE INFORMATION
+### FILE INFORMATION
 
 - Folder - audio: contains all the sounds.
 - Folder - build: used to build the game application.

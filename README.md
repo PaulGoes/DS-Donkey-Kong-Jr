@@ -74,6 +74,7 @@ Good introduction tutorials to using devkitpro and DS programming:
 ## HOW TO PLAY THE GAME WITH EMULATION
 
 The game can be played with the DeSmuME Nintendo DS emulator: [desmume.org](https://desmume.org/).
+
 The DeSmuME emulator is also a core in RetroArch so it is possible to play the game with RetroArch: [retroarch.com](https://www.retroarch.com/).
 
 In the emulator you need to place the 'Game & Watch Donkey Kong Jr.nds' rom in the appropriate rom-folder.
@@ -83,3 +84,6 @@ In the emulator you need to place the 'Game & Watch Donkey Kong Jr.nds' rom in t
 
 > [!TIP]
 > You might also need to provide the generic NDS BIOS files (bios7.bin, bios9.bin and firmware.bin) to the emulator.
+
+When you play the game with RetroArch, it is also possible to get Retro Achievements for the game.
+![DSDKJR](https://github.com/PaulGoes/DS-Donkey-Kong-Jr/blob/master/media/DKJRDSRA.jpg)
